@@ -1,0 +1,12 @@
+Docker Swarm 和 Docker Compose 一样，都是 Docker 官方容器编排项目，但不同的是，Docker Compose 是一个在单个服务器或主机上创建多个容器的工具，
+而 Docker Swarm 则可以在多个服务器或主机上创建容器集群服务，
+对于微服务的部署，显然 Docker Swarm 会更加适合。对于微服务的部署与管理，目前最流行的是google的Kubernetes，简称为k8s。
+Rancher是一个容器管理平台,通过Rancher可以实现Docker和Kubernetes的轻松部署。
+
+docker pull rancher/server　
+docker run --name rancher-server -d --restart=always -p 9001:8080 rancher/server
+
+中文帮助文档
+https://rancher.com/docs/rancher/v1.6/zh/quick-start-guide/
+
+
