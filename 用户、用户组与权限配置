@@ -1,0 +1,67 @@
+linux下添加用户和用户组，并且有sudo权限
+添加用户和用户组，并且有sudo权限
+1、添加用户组
+
+groupadd dev
+
+2、添加用户并且归属dev组
+
+useradd -g dev yujuan
+
+3、修改用户密码
+
+passwd yujuan
+
+4、查看组
+
+cat /etc/group
+
+5、查看用户
+
+cat /etc/passwd
+
+6、给用户组增加sudo权限
+
+sudo vim /etc/sudoers
+%dev  ALL=(ALL)        NOPASSWD:ALL
+//免密
+%dev  ALL=(ALL)        ALL
+
+深度截图
+7、给用户增加sudo权限
+
+sudo vim /etc/sudoers
+yujuan  ALL=(ALL)        NOPASSWD:ALL
+//免密
+yujuan  ALL=(ALL)        ALL
+
+8、删除用户
+
+#如果有sudo权限，记得删除 /etc/sudoers的配置
+userdel yujuan
+
+9、删除用户组
+
+#如果有sudo权限，记得删除 /etc/sudoers的配置
+groupdel dev
+
+ Linux添加用户（user）到用户组（group）
+将一个用户添加到用户组中，千万不能直接用：
+usermod -G groupA
+这样做会使你离开其他用户组，仅仅做为 这个用户组 groupA 的成员。
+应该用 加上 -a 选项：
+usermod -a -G dev wql
+
+
+cat /etc/passwd 可以查看所有用户的列表
+w 可以查看当前活跃的用户列表
+cat /etc/group 查看用户组
+
+groups 查看当前登录用户的组内成员
+groups gliethttp 查看gliethttp用户所在的组,以及组内成员
+whoami 查看当前登录用户名
+
+一个简明的layout命令
+
+cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more
+
