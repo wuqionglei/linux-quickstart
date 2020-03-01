@@ -1,0 +1,23 @@
+大的项目管理是困难的，所以需要借助一些工具去规范代码，扫描出代码潜在的缺陷。这方便SonarQube非常优秀，我们先介绍一下SonarQube检查功能：
+1，不遵守代码标准（checkstyle）
+2，潜在缺陷（空指针）
+3，糟糕的复杂度（难以理解）
+4，重复（通用的方法需要归纳封装）
+5，糟糕的注释
+7，糟糕的设计（耦合度检查）
+需要用到的软件有：SonarQube,Sonar-scanner。
+SonarQube为代码检查的server,并提供可视化界面；
+Sonar-scanner为client。
+用于收集检查数据并且发送到server中。
+
+1 启动postgresql
+
+$ docker run --name db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -d postgres
+
+2 启动 sonarqube
+
+$ docker run --name sq --link db -e SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar -p 9000:9000 -d sonarqube
+
+3 打开 http://localhost:9000/ , 点击 "Log in"
+
+登录账号：admin 密码：admin
