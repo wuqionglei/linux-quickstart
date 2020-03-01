@@ -1,0 +1,11 @@
+系统安装源：
+cd yum.repos.d
+    4.1 进入到系统yum源的目录下
+    cd  /etc/yum.repos.d
+    4.2 下载yum源,并上传到虚拟机
+    网址：http://mirrors.163.com/.help/CentOS7-Base-163.repo
+    4.3 将源移动到yum源目录下，每个人路径不同，故命令在此略过
+    4.4 运行makecache 生成缓存
+    yum makecache 
+    4.5 运行yum clean all
+    yum clean all
