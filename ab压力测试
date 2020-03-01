@@ -1,0 +1,3 @@
+apt-get install apache2-utils
+ab -c10 -n50000 http://localhost:8080/
+运行 ab -n 100 -c 10 http://www.meetu.hk/ 对 http://www.meetu.hk/ 进行100次请求，10个并发请求压力测试结果。
