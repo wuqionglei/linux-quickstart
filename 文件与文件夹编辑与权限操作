@@ -1,0 +1,31 @@
+vi：
+清空
+:.,$d
+移动到首行
+:gg
+查找xx
+:/xx
+显示行号
+:set number
+复制一行，在esc状态光标遇到某行
+:yy
+粘贴:
+:p
+移动到第n行
+:n
+
+
+apt-get install vim
+vim --version | grep clipboard
+apt-get install vim vim-scripts vim-gtk vim-gnome
+vim --version | grep clipboard
+
+  
+文件与文件夹操作：
+删除文件：
+    rm -f file
+删除文件夹：(-r是递归模式)    
+    rm -rf dir
+
+修改文件夹的所有者
+sudo chown -R wql:root www 
