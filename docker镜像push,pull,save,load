@@ -1,0 +1,18 @@
+docker push (需要名称规范)
+想要push到镜像库，格式必须是：库名/镜像命:版本
+    docker tag visioncloud:dev wuqionglei/visioncloud:dev   
+    docker push wuqionglei/visioncloud:dev
+
+  docker导出和导入：
+  docker save 4e4c445311e6  >  C:\node.tar
+  docker load < C:\node.tar  
+
+  docker save nginx:1.17.3  >  d:\docker\nginx.tar
+  docker save wuqionglei/postgres:9.6  >  d:\docker\postgres.tar
+  docker save wuqionglei/web:test  >  d:\docker\web.tar
+  docker save redis:latest  > d:\docker\redis.tar
+
+  docker load <nginx.tar
+  docker load <postgres.tar
+  docker load <web.tar
+  docker load <redis.tar
