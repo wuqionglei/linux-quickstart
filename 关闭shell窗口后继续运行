@@ -1,0 +1,4 @@
+linux通过命令行启动.net core项目，关闭shell后项目就被关闭
+xxx &
+&表示后台运行
+nohup xxx &
