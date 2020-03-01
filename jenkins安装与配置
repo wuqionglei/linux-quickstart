@@ -25,8 +25,27 @@ cp /var/jenkins_home/jenkins.war /usr/share/jenkins/
 退出容器并重启
 exit
 docker restart +ContainerName
-###################################################################
-创建一个自由风格的任务test，构建netcore项目
+########################配置连接gitlab###########################################
+ 1.用root用户创建jenkins容器，进入容器设置用户jenkins的密码；
+ 2.切换到jenkins用户，执行:
+ ssh-keygen -t rsa -C "wuqionglei@qq.com" -f ~/.ssh/jenkins
+
+    生成秘钥：
+    /var/jenkins_home/.ssh/jenkins
+
+    生成公钥：
+    /var/jenkins_home/.ssh/jenkins.pub
+   
+3.登录gitlab,用户设置-》SSH Keys,把在jenkins生成的公钥加入进去；
+
+4.回到jenkins新建一个项目，源码管理选择git，代码库：git@192.168.0.8:test/test.git
+credentials选择SSH Username with private key,
+用户名填写:jenkins
+private key ：填写/var/jenkins_home/.ssh/jenkins的内容
+
+
+##############################创建一个自由风格的任务test，构建netcore项目##############
+
 
 
 cd "%WORKSPACE%\test"
