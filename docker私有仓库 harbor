@@ -1,0 +1,14 @@
+docker私有仓库 harbor：
+https://www.cnblogs.com/Bourbon-tian/p/7214211.html
+
+
+	docker中安装centos无法使用systemctl命令管理进程，需要--privileged：
+		docker run -tdi --privileged harbor_centos:latest init 
+
+解压缩：
+tar xvzf
+
+配置私有仓库地址：
+/etc/docker/daemon.json
+sudo systemctl daemon-reload
+sudo systemctl restart docker
