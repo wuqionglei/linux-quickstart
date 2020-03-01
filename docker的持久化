@@ -1,0 +1,38 @@
+/*=Docker的数据持久化主要有两种方式：
+  *  容器运行时应该尽量保持容器存储层不发生写操作
+  *  要么存在于host的某个指定目录中（使用bind mount），要么使用docker自己管理的volume（/var/lib/docker/volumes下）
+  *  bind mount
+  *      bind mount自docker早期便开始为人们使用了，用于将host机器的目录mount到container中。
+  *      但是bind mount在不同的宿主机系统时不可移植的，比如Windows和Linux的目录结构是不一样的，bind mount所指向的host目录也不能一样。这也是为什么bind mount不能出现在Dockerfile中的原因，因为这样Dockerfile就不可移植了
+  *  volume
+  *     volume也是绕过container的文件系统，直接将数据写到host机器上，只是volume是被docker管理的，docker下所有的volume都在host机器上的指定目录下/var/lib/docker/volumes。
+  */
+  将my-volume挂载到container中的/mydata目录：docker下所有的volume都在host机器上的指定目录下/var/lib/docker/volumes
+  为了防止运行时用户忘记将动态文件所保存目录挂载为卷，在 Dockerfile 中，我们可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器存储层写入大量数据。
+    VOLUME /data
+
+  这里的 /data 目录就会在运行时自动挂载为匿名卷，任何向 /data 中写入的信息都不会记录进容器存储层，从而保证了容器存储层的无状态化。当然，运行时可以覆盖这个挂载设置。比如：
+    docker run -d -v mydata:/data xxx
+    docker run -it -v my-volume:/mydata alpine sh
+    docker run -d -v mydata:/data xxx
+    docker rum -d -v /c/Users/Public/postgredata:/data xxxx
+    docker rum -d -v /c/app:/app
+  使用 dokcer inspect mycontainer 可以查看到具体的挂载情况：
+    docker inspect mycontainer
+
+  创建postgres的docker 和 持久化
+    docker pull postgres:9.6
+    持久化设置
+      创建本地卷
+        docker volume create pgdata
+      或者挂载本地路径(muqia)
+        docker run -it --rm -v /d/docker_volume/postgresdata:/var/lib/postgresql/data -p 15432:5432 postgres:9.6
+        docker run -it --rm -v pgdata:/var/lib/postgresql/data -p 25432:5432 postgres:9.6
+  
+  查看卷
+   docker volume ls 
+   docker volume ls | grep mysql     
+   docker volume inspect vagrant_mysql
+  删除卷
+    docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+    docker volume rm $(docker volume ls -qf dangling=true)
