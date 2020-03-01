@@ -1,0 +1,14 @@
+下载地址
+https://www.microsoft.com/net/download/dotnet-core/2.1
+安装符合服务器CPU架构的二进制包。
+
+如果架构不对，会出现一下错误：
+-bash: /usr/bin/dotnet: cannot execute binary file
+
+下载（比如：SDK 2.1.300）
+
+wget https://download.microsoft.com/download/8/8/5/88544F33-836A-49A5-8B67-451C24709A8F/dotnet-sdk-2.1.300-linux-x64.tar.gz
+安装
+mkdir -p /usr/share/dotnet && tar zxf dotnet-sdk-2.1.300-linux-x64.tar.gz -C /usr/share/dotnet
+配置软连接
+ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
