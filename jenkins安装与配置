@@ -25,4 +25,19 @@ cp /var/jenkins_home/jenkins.war /usr/share/jenkins/
 退出容器并重启
 exit
 docker restart +ContainerName
+###################################################################
+创建一个自由风格的任务test，构建netcore项目
+
+
+cd "%WORKSPACE%\test"
+dotnet restore
+dotnet build
+dotnet publish -o \var\jenkins\publish\test
+
+
+dotnet restore，publish中间遇到的几个坑
+1.dotnet 找不到命令 dotnet command not found
+解决办法:系统管理配置环境变量
+# echo $PATH //查看系统的path变量
+
 
