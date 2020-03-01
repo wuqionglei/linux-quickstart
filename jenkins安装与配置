@@ -1,0 +1,28 @@
+Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。Jenkins功能包括：
+1、持续的软件版本发布/测试项目。
+2、监控外部调用执行的工作。
+
+
+docker pull jenkins/jenkins:latest
+
+运行：
+docker run -d -u jenkins -p 8001:8080 -v /d/jenkins:/var/jenkins_home --name jenkins2 --restart=always jenkins:wql
+必须使用jenkins用户，否则会有权限问题
+
+更新：
+进入 Jenkins 容器在宿主机的挂载目录/home/jenkins中
+cd /home/jenkins
+在 CentOS7 中下载Jenkins的最新war包
+wget http://mirrors.jenkins.io/war/latest/jenkins.war
+进入容器
+docker exec -it -u root +ContainerId bash
+查看容器中jenkins war包的位置，并备份原来的war包
+whereis jenkins
+cd /usr/share/jenkins
+cp jenkins.war jenkinsBAK.war
+将/var/jenkins_home下的包cp到/usr/share/jenkins下覆盖
+cp /var/jenkins_home/jenkins.war /usr/share/jenkins/
+退出容器并重启
+exit
+docker restart +ContainerName
+
