@@ -1,0 +1,21 @@
+centos7配置SSH免密码登录
+https://blog.csdn.net/u014180504/article/details/83579192
+
+A机器要免密登录B机器：
+1.现在a机器上创建秘钥对
+
+mkdir /.ssh
+ssh-keygen -t rsa
+
+把a的公钥给b
+scp /root/.ssh/id_rsa.pub root@192.168.1.1:/root/id_rsa.pub
+
+2.b机器上
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+PubkeyAuthentication yes
+
+vi authorzied_keys #把a的公钥内容写入
+
+3.在a机器
+ssh root@b机器的地址
