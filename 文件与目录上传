@@ -1,0 +1,6 @@
+上传文件
+    pscp ‪D:\docker_volume_linux\docker-compose.yml wql@192.168.0.8:/home/wql/data/docker_volume_linux/
+    pscp D:\docker\web.tar wql@192.168.0.8:/home/wql/data/docker_volume_linux/
+    
+  上传目录
+     pscp -r D:\docker_volume_linux\nginx\www wql@192.168.0.8:/home/wql/data/docker_volume_linux/nginx/
