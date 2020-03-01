@@ -1,0 +1,31 @@
+centos 查看所有运行中的服务ip和端口信息
+netstat -tunpl
+
+##################################
+在/lib/systemd/system下创建服务配置文件：
+vi myapp.service
+##################################
+myapp.service 内容如下：
+  [unit]
+  Description="myapp Service"
+  [Service]
+  WorkingDirectory=/home/wql/release
+  ExecStart=/usr/bin/dotnet myapp.dll
+  Restart=always
+
+  # Restart service after 10 seconds if the dotnet service crashes:
+  RestartSec=10
+  KillSignal=SIGINT
+  SyslogIdentifier=costapp
+  User=root
+  Environment=ASPNETCORE_ENVIRONMENT=Production
+  Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+  [Install]
+  WantedBy=default.target
+##################################
+使用systemctrl命令部署服务
+  systemctrl daemon-reload #新增服务配置后加载服务配置
+  systemctrl start myapp #启动服务
+  systemctrl status myapp #服务状态
+  systemctrl enable myapp #开机启动
